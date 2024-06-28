@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, View } from 'react-native'
 
 const App = () => {
   return (
@@ -6,12 +6,12 @@ const App = () => {
       style={{
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
       }}
     >
-      <Text>Sup.</Text>
+      <Text>Sup World.</Text>
     </View>
-  );
-};
+  )
+}
 
-export default App;
+export default App
