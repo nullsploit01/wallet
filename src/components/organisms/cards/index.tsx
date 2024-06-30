@@ -1,15 +1,18 @@
-import { Fragment } from 'react'
-import { Text } from 'tamagui'
+import { ScrollView, Text, View } from 'tamagui'
 
 import DialogBox from '@/src/components/molecules/dialog-box'
 import { ICardsProps } from '@/src/types/components/organisms'
 
 const Cards = ({ type }: ICardsProps) => {
   return (
-    <Fragment>
-      <Text>{type} Card</Text>
-      <DialogBox label="Add Card" title="Add Card" />
-    </Fragment>
+    <View flex={1} justifyContent="flex-start">
+      <ScrollView>
+        <Text>{type} Card</Text>
+      </ScrollView>
+      <View position="absolute" bottom={0} right={0} width="30%" padding={10} margin={30}>
+        <DialogBox label="Add Card" title="Add Card" />
+      </View>
+    </View>
   )
 }
 
