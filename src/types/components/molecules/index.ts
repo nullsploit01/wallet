@@ -9,3 +9,10 @@ export interface ITabsListItem {
 export interface ITabsListProps {
   items: ITabsListItem[]
 }
+
+export interface IDialogBoxProps {
+  label: string
+  title: string | ReactNode
+  description?: string | ReactNode
+  content?: ReactNode
+}
