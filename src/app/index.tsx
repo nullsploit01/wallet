@@ -1,5 +1,8 @@
 import { useFonts } from 'expo-font'
-import { Text, View } from 'react-native'
+import { Stack } from 'expo-router'
+import { Fragment } from 'react'
+
+import CardTabs from '@/src/components/organisms/card-tabs'
 
 const HomePage = () => {
   const [loaded] = useFonts({
@@ -12,15 +15,10 @@ const HomePage = () => {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
-      <Text>Sup World.</Text>
-    </View>
+    <Fragment>
+      <Stack.Screen options={{ headerShown: true, headerTitle: 'Hello!' }} />
+      <CardTabs />
+    </Fragment>
   )
 }
 
