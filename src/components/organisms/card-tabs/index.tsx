@@ -1,17 +1,23 @@
-import { Text, View } from 'tamagui'
+import { Text } from 'tamagui'
+
+import TabsList from '@/src/components/molecules/tabs-list'
+import { ITabsListItem } from '@/src/types/components/molecules'
 
 const CardTabs = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
-      <Text>Sup World.</Text>
-    </View>
-  )
+  const itemsList: ITabsListItem[] = [
+    {
+      label: 'Credit Cards',
+      value: 'credit',
+      children: <Text>Credit Cards</Text>
+    },
+    {
+      label: 'Debit Cards',
+      value: 'debit',
+      children: <Text>Debit Cards</Text>
+    }
+  ]
+
+  return <TabsList items={itemsList} />
 }
 
 export default CardTabs
