@@ -5,15 +5,11 @@ import { ITabsListProps } from '@/src/types/components/molecules'
 const TabsList = ({ items }: ITabsListProps) => {
   return (
     <Tabs
-      defaultValue={items.length ? items[0].value : undefined}
-      orientation="horizontal"
-      flexDirection="column"
-      borderRadius="$4"
-      flex={1}
-      borderWidth="$0.25"
-      overflow="hidden"
-      borderColor="$borderColor"
       elevate
+      flex={1}
+      flexDirection="column"
+      borderColor="$borderColor"
+      defaultValue={items.length ? items[0].value : undefined}
     >
       <Tabs.List>
         {items.map((item) => {
@@ -38,19 +34,7 @@ const TabsList = ({ items }: ITabsListProps) => {
 
 const TabsContent = (props: TabsContentProps) => {
   return (
-    <Tabs.Content
-      backgroundColor="$background"
-      padding="$2"
-      alignItems="center"
-      justifyContent="center"
-      flex={1}
-      borderColor="$background"
-      borderRadius="$2"
-      borderTopLeftRadius={0}
-      borderTopRightRadius={0}
-      borderWidth="$2"
-      {...props}
-    >
+    <Tabs.Content backgroundColor="$background" flex={1} {...props}>
       {props.children}
     </Tabs.Content>
   )
