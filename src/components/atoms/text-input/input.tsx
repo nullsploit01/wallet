@@ -1,15 +1,22 @@
 import React, { Fragment } from 'react'
-import { Input } from 'tamagui'
+import { Input, Label } from 'tamagui'
 
 import { ITextInputProps } from '@/src/types/components/atoms'
+import { generateRandomId } from '@/src/utils/general'
 
-const TextInput = ({ onValueChange, ...rest }: ITextInputProps) => {
+const TextInput = ({ label, onValueChange, ...rest }: ITextInputProps) => {
+  const ID = generateRandomId()
+
   return (
     <Fragment>
+      <Label fontWeight="800" htmlFor={ID}>
+        {label}
+      </Label>
       <Input
+        id={ID}
         borderColor="$gray10"
         onChange={(e) => {
-          const v = e.nativeEvent.text
+          const v = e.nativeEvent.text?.trim()
           onValueChange?.(v)
         }}
         {...rest}

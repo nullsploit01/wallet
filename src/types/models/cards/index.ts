@@ -6,7 +6,8 @@ export enum CardTypes {
 export interface ICard {
   type: CardTypes
   number: string
-  cvv: Date
+  cvv: string
+  expiry: Date | string
   name: string
   label: string
 }
