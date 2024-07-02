@@ -11,7 +11,7 @@ const Cards = ({ type }: ICardsProps) => {
         <Text>{type} Card</Text>
       </ScrollView>
       <View position="absolute" bottom={0} right={0} width="30%" padding={10} margin={30}>
-        <DialogBox label="Add Card" title="Add Card" content={<CardForm />} />
+        <DialogBox label="Add Card" title="Add Card" content={<CardForm type={type} />} />
       </View>
     </View>
   )
