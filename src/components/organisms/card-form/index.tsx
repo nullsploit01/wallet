@@ -1,3 +1,4 @@
+import { router } from 'expo-router'
 import { useState } from 'react'
 import { Button, Form, Spinner, View, XStack, YStack } from 'tamagui'
 
@@ -9,7 +10,9 @@ const CardForm = ({ type }: ICardFormProps) => {
   const [_status, setStatus] = useState<'off' | 'submitting' | 'submitted'>('off')
   const [_cardDetails, setCardDetails] = useState<ICard>({ type } as ICard)
 
-  const onSave = () => {}
+  const onSave = () => {
+    router.replace({ pathname: '/', params: { type } })
+  }
 
   return (
     <Form

@@ -3,12 +3,15 @@ import { StyleSheet, useWindowDimensions } from 'react-native'
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view'
 
 import Cards from '@/src/components/organisms/cards'
+import { ICardTabsProps } from '@/src/types/components/organisms'
 import { CardTypes } from '@/src/types/models/cards'
 
-const CardTabs = () => {
+const CardTabs = ({ active }: ICardTabsProps) => {
   const layout = useWindowDimensions()
 
-  const [index, setIndex] = useState(0)
+  const activeTab = active !== undefined ? Number(active) : 0
+  const [index, setIndex] = useState(activeTab)
+
   const [routes] = useState([
     { key: 'credit', title: 'Credit Cards' },
     { key: 'debit', title: 'Debit Cards' }

@@ -1,10 +1,13 @@
+import { CardTypes } from '../types/models/cards'
 import { useFonts } from 'expo-font'
-import { Stack } from 'expo-router'
+import { Stack, useLocalSearchParams } from 'expo-router'
 import { Fragment } from 'react'
 
 import CardTabs from '@/src/components/organisms/card-tabs'
 
 const HomePage = () => {
+  const { type } = useLocalSearchParams() as any
+
   const [loaded] = useFonts({
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf')
@@ -17,7 +20,7 @@ const HomePage = () => {
   return (
     <Fragment>
       <Stack.Screen options={{ headerShown: true, headerTitle: 'Hello!' }} />
-      <CardTabs />
+      <CardTabs active={type !== undefined ? (type as CardTypes) : type} />
     </Fragment>
   )
 }

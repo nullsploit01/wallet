@@ -7,3 +7,7 @@ export interface ICardsProps {
 export interface ICardFormProps {
   type: CardTypes
 }
+
+export interface ICardTabsProps {
+  active?: CardTypes
+}
