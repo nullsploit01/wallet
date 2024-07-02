@@ -1,23 +1,32 @@
-import TabsList from '@/src/components/molecules/tabs-list'
+import { useState } from 'react'
+import { useWindowDimensions } from 'react-native'
+import { SceneMap, TabView } from 'react-native-tab-view'
+
 import Cards from '@/src/components/organisms/cards'
-import { ITabsListItem } from '@/src/types/components/molecules'
 import { CardTypes } from '@/src/types/models/cards'
 
 const CardTabs = () => {
-  const itemsList: ITabsListItem[] = [
-    {
-      label: 'Credit Cards',
-      value: 'credit',
-      children: <Cards type={CardTypes.Credit} />
-    },
-    {
-      label: 'Debit Cards',
-      value: 'debit',
-      children: <Cards type={CardTypes.Debit} />
-    }
-  ]
+  const layout = useWindowDimensions()
 
-  return <TabsList items={itemsList} />
+  const [index, setIndex] = useState(0)
+  const [routes] = useState([
+    { key: 'credit', title: 'Credit Cards' },
+    { key: 'debit', title: 'Debit Cards' }
+  ])
+
+  const renderScene = SceneMap({
+    credit: () => <Cards type={CardTypes.Credit} />,
+    debit: () => <Cards type={CardTypes.Debit} />
+  })
+
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+    />
+  )
 }
 
 export default CardTabs
