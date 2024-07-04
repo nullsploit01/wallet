@@ -1,3 +1,4 @@
+import cardValidator from 'card-validator'
 import { router } from 'expo-router'
 import { useState } from 'react'
 import { formatWithMask } from 'react-native-mask-input'
@@ -32,13 +33,28 @@ const CardForm = ({ type }: ICardFormProps) => {
   ]
 
   const cardValidTillDateMask = [/\d/, /\d/, '/', /\d/, /\d/]
+  const cardCVVMask = [/\d/, /\d/, /\d/, /\d/]
 
   const [_status, setStatus] = useState<'off' | 'submitting' | 'submitted'>('off')
   const [_cardDetails, setCardDetails] = useState<ICard>({ type } as ICard)
+  const [_cardDetailsValidation, setCardDetailsValidation] = useState({
+    number: true,
+    cvv: true,
+    name: true,
+    expiry: true
+  })
 
   const { addCard } = useCardStore()
 
   const onSave = () => {
+    if (
+      !_cardDetailsValidation.cvv ||
+      !_cardDetailsValidation.number ||
+      !_cardDetails.expiry ||
+      !_cardDetailsValidation.name
+    )
+      return
+
     addCard(_cardDetails)
     router.replace({ pathname: '/', params: { type } })
   }
@@ -60,8 +76,15 @@ const CardForm = ({ type }: ICardFormProps) => {
           value={_cardDetails.name}
           placeholder="John Doe"
           label="Card Holder Name"
+          autoComplete="additional-name"
           marginBottom="$1.5"
           onValueChange={(v) => {
+            setCardDetailsValidation((prev) => {
+              return {
+                ...prev,
+                name: cardValidator.cardholderName(v).isValid
+              }
+            })
             setCardDetails((prev) => {
               return { ...prev, name: v }
             })
@@ -72,12 +95,20 @@ const CardForm = ({ type }: ICardFormProps) => {
           width="100%"
           value={_cardDetails.number}
           keyboardType="numeric"
+          autoComplete="cc-number"
           placeholder="4111 4322 5675"
           label="Card Number"
           onValueChange={(v) => {
             const { masked } = formatWithMask({
               text: v,
               mask: cardNumberMask
+            })
+
+            setCardDetailsValidation((prev) => {
+              return {
+                ...prev,
+                number: cardValidator.number(masked).isValid
+              }
             })
 
             setCardDetails((prev) => {
@@ -93,10 +124,18 @@ const CardForm = ({ type }: ICardFormProps) => {
               placeholder="MM/YY"
               keyboardType="numeric"
               label="Valid Till"
+              autoComplete="cc-exp"
               onValueChange={(v) => {
                 const { masked } = formatWithMask({
                   text: v,
                   mask: cardValidTillDateMask
+                })
+
+                setCardDetailsValidation((prev) => {
+                  return {
+                    ...prev,
+                    expiry: cardValidator.expirationDate(masked).isValid
+                  }
                 })
 
                 setCardDetails((prev) => {
@@ -109,11 +148,25 @@ const CardForm = ({ type }: ICardFormProps) => {
             <TextInput
               marginBottom="$1.5"
               placeholder="***"
+              autoComplete="cc-csc"
+              keyboardType="numeric"
               label="CVV"
               value={_cardDetails.cvv}
               onValueChange={(v) => {
+                const { masked } = formatWithMask({
+                  text: v,
+                  mask: cardCVVMask
+                })
+
+                setCardDetailsValidation((prev) => {
+                  return {
+                    ...prev,
+                    cvv: cardValidator.cvv(masked).isValid
+                  }
+                })
+
                 setCardDetails((prev) => {
-                  return { ...prev, cvv: v }
+                  return { ...prev, cvv: masked }
                 })
               }}
             />
@@ -132,15 +185,13 @@ const CardForm = ({ type }: ICardFormProps) => {
         />
       </YStack>
 
-      <Form.Trigger asChild disabled={_status !== 'off'}>
-        <Button
-          width="100%"
-          onPress={onSave}
-          icon={_status === 'submitting' ? () => <Spinner /> : undefined}
-        >
-          Save
-        </Button>
-      </Form.Trigger>
+      <Button
+        width="100%"
+        onPress={onSave}
+        icon={_status === 'submitting' ? () => <Spinner /> : undefined}
+      >
+        Save
+      </Button>
     </Form>
   )
 }
