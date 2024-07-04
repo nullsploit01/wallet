@@ -1,56 +1,36 @@
-import { Fragment } from 'react'
-import { Adapt, Button, Dialog, Sheet } from 'tamagui'
+import React, { useState } from 'react'
+import { Modal } from 'react-native'
+import { Button, H3, View, YStack } from 'tamagui'
 
 import { IDialogBoxProps } from '@/src/types/components/molecules'
 
-const DialogBox = ({ label, title, description, content }: IDialogBoxProps) => {
+const DialogBox = ({ label, title, content }: IDialogBoxProps) => {
+  const [modalVisible, setModalVisible] = useState(false)
+
   return (
-    <Dialog modal>
-      <Dialog.Trigger asChild>
-        <Button>{label}</Button>
-      </Dialog.Trigger>
-
-      <Adapt when="sm" platform="touch">
-        <Sheet animation="medium" zIndex={200000} modal dismissOnSnapToBottom>
-          <Sheet.Frame padding="$4" gap="$4">
-            <Adapt.Contents />
-          </Sheet.Frame>
-          <Sheet.Overlay animation="lazy" enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} />
-        </Sheet>
-      </Adapt>
-
-      <Dialog.Portal>
-        <Dialog.Overlay
-          key="overlay"
-          animation="slow"
-          opacity={0.5}
-          enterStyle={{ opacity: 0 }}
-          exitStyle={{ opacity: 0 }}
-        />
-
-        <Dialog.Content
-          bordered
-          elevate
-          key="content"
-          animateOnly={['transform', 'opacity']}
-          animation={[
-            'quicker',
-            {
-              opacity: {
-                overshootClamping: true
-              }
-            }
-          ]}
-          enterStyle={{ x: 0, y: -20, opacity: 0, scale: 0.9 }}
-          exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
-          gap="$4"
-        >
-          <Dialog.Title>{title}</Dialog.Title>
-          {description && <Dialog.Description>{description}</Dialog.Description>}
-          {content && <Fragment>{content}</Fragment>}
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog>
+    <YStack justifyContent="center" alignItems="center" flex={1}>
+      <Modal
+        animationType="fade"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible)
+        }}
+      >
+        <YStack justifyContent="center" alignItems="center" flex={1}>
+          <H3>{title}</H3>
+          <View marginVertical="$5">{content}</View>
+        </YStack>
+      </Modal>
+      <Button
+        borderColor="#2F3645"
+        borderWidth="$1"
+        backgroundColor="$gray1"
+        onPress={() => setModalVisible(true)}
+      >
+        {label}
+      </Button>
+    </YStack>
   )
 }
 
