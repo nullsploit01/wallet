@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Button, Form, Spinner, View, XStack, YStack } from 'tamagui'
 
 import TextInput from '@/src/components/atoms/text-input/input'
+import { useCardStore } from '@/src/stores/use-cards'
 import { ICardFormProps } from '@/src/types/components/organisms'
 import { ICard } from '@/src/types/models/cards'
 
@@ -10,7 +11,10 @@ const CardForm = ({ type }: ICardFormProps) => {
   const [_status, setStatus] = useState<'off' | 'submitting' | 'submitted'>('off')
   const [_cardDetails, setCardDetails] = useState<ICard>({ type } as ICard)
 
+  const { addCard } = useCardStore()
+
   const onSave = () => {
+    addCard(_cardDetails)
     router.replace({ pathname: '/', params: { type } })
   }
 
