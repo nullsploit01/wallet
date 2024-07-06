@@ -74,7 +74,7 @@ const CardForm = ({ type }: ICardFormProps) => {
             expiry: false,
             messages: {
               ...prev.messages,
-              expiry: 'Please enter valid till date'
+              expiry: 'Please enter card expiry date'
             }
           }
         })
