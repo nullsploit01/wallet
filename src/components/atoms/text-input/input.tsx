@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
-import { Input, Label } from 'tamagui'
+import { Input, Label, Text } from 'tamagui'
 
 import { ITextInputProps } from '@/src/types/components/atoms'
 import { generateRandomId } from '@/src/utils/general'
 
-const TextInput = ({ label, onValueChange, ...rest }: ITextInputProps) => {
+const TextInput = ({ label, error, onValueChange, ...rest }: ITextInputProps) => {
   const ID = generateRandomId()
 
   return (
@@ -21,6 +21,7 @@ const TextInput = ({ label, onValueChange, ...rest }: ITextInputProps) => {
         }}
         {...rest}
       />
+      {error && <Text color="$red10">{error}</Text>}
     </Fragment>
   )
 }

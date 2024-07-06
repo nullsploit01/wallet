@@ -8,7 +8,7 @@ export interface ICard {
   type: CardTypes
   number: string
   cvv: string
-  expiry: Date | string
+  expiry: string
   name: string
   label: string
   createdAt: Date

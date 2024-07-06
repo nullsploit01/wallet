@@ -41,22 +41,88 @@ const CardForm = ({ type }: ICardFormProps) => {
     number: true,
     cvv: true,
     name: true,
-    expiry: true
+    expiry: true,
+    messages: {
+      number: '',
+      cvv: '',
+      name: '',
+      expiry: ''
+    }
   })
 
   const { addCard } = useCardStore()
 
   const onSave = () => {
-    if (
-      !_cardDetailsValidation.cvv ||
-      !_cardDetailsValidation.number ||
-      !_cardDetails.expiry ||
-      !_cardDetailsValidation.name
-    )
+    if (!isCardValid()) {
+      if (!_cardDetails.name?.trim()) {
+        setCardDetailsValidation((prev) => {
+          return {
+            ...prev,
+            name: false,
+            messages: {
+              ...prev.messages,
+              name: 'Please enter card holder name'
+            }
+          }
+        })
+      }
+
+      if (!_cardDetails.expiry?.trim()) {
+        setCardDetailsValidation((prev) => {
+          return {
+            ...prev,
+            expiry: false,
+            messages: {
+              ...prev.messages,
+              expiry: 'Please enter valid till date'
+            }
+          }
+        })
+      }
+
+      if (!_cardDetails.cvv?.trim()) {
+        setCardDetailsValidation((prev) => {
+          return {
+            ...prev,
+            cvv: false,
+            messages: {
+              ...prev.messages,
+              cvv: 'Please enter card CVV'
+            }
+          }
+        })
+      }
+
+      if (!_cardDetails.number?.trim()) {
+        setCardDetailsValidation((prev) => {
+          return {
+            ...prev,
+            number: false,
+            messages: {
+              ...prev.messages,
+              number: 'Please enter card number'
+            }
+          }
+        })
+      }
       return
+    }
 
     addCard(_cardDetails)
     router.replace({ pathname: '/', params: { type } })
+  }
+
+  const isCardValid = () => {
+    return (
+      _cardDetailsValidation.cvv &&
+      _cardDetailsValidation.number &&
+      _cardDetailsValidation.expiry &&
+      _cardDetailsValidation.name &&
+      _cardDetails.number &&
+      _cardDetails.name &&
+      _cardDetails.cvv &&
+      _cardDetails.expiry
+    )
   }
 
   return (
@@ -78,13 +144,23 @@ const CardForm = ({ type }: ICardFormProps) => {
           label="Card Holder Name"
           autoComplete="additional-name"
           marginBottom="$1.5"
+          error={!_cardDetailsValidation.name ? _cardDetailsValidation.messages.name : undefined}
           onValueChange={(v) => {
+            const validationStatus =
+              cardValidator.cardholderName(v).isValid ||
+              cardValidator.cardholderName(v).isPotentiallyValid
+
             setCardDetailsValidation((prev) => {
               return {
                 ...prev,
-                name: cardValidator.cardholderName(v).isValid
+                name: validationStatus,
+                messages: {
+                  ...prev.messages,
+                  name: !validationStatus ? 'Invalid Name' : ''
+                }
               }
             })
+
             setCardDetails((prev) => {
               return { ...prev, name: v }
             })
@@ -98,16 +174,27 @@ const CardForm = ({ type }: ICardFormProps) => {
           autoComplete="cc-number"
           placeholder="4111 4322 5675"
           label="Card Number"
+          error={
+            !_cardDetailsValidation.number ? _cardDetailsValidation.messages.number : undefined
+          }
           onValueChange={(v) => {
             const { masked } = formatWithMask({
               text: v,
               mask: cardNumberMask
             })
 
+            const validationStatus =
+              cardValidator.number(masked).isValid ||
+              cardValidator.number(masked).isPotentiallyValid
+
             setCardDetailsValidation((prev) => {
               return {
                 ...prev,
-                number: cardValidator.number(masked).isValid
+                number: validationStatus,
+                messages: {
+                  ...prev.messages,
+                  number: !validationStatus ? 'Invalid Card Number' : ''
+                }
               }
             })
 
@@ -123,6 +210,9 @@ const CardForm = ({ type }: ICardFormProps) => {
               marginBottom="$1.5"
               placeholder="MM/YY"
               keyboardType="numeric"
+              error={
+                !_cardDetailsValidation.expiry ? _cardDetailsValidation.messages.expiry : undefined
+              }
               label="Valid Till"
               autoComplete="cc-exp"
               onValueChange={(v) => {
@@ -131,10 +221,18 @@ const CardForm = ({ type }: ICardFormProps) => {
                   mask: cardValidTillDateMask
                 })
 
+                const validationStatus =
+                  cardValidator.expirationDate(masked).isValid ||
+                  cardValidator.expirationDate(masked).isPotentiallyValid
+
                 setCardDetailsValidation((prev) => {
                   return {
                     ...prev,
-                    expiry: cardValidator.expirationDate(masked).isValid
+                    expiry: validationStatus,
+                    messages: {
+                      ...prev.messages,
+                      expiry: !validationStatus ? 'Invalid Date' : ''
+                    }
                   }
                 })
 
@@ -151,6 +249,7 @@ const CardForm = ({ type }: ICardFormProps) => {
               autoComplete="cc-csc"
               keyboardType="numeric"
               label="CVV"
+              error={!_cardDetailsValidation.cvv ? _cardDetailsValidation.messages.cvv : undefined}
               value={_cardDetails.cvv}
               onValueChange={(v) => {
                 const { masked } = formatWithMask({
@@ -158,10 +257,18 @@ const CardForm = ({ type }: ICardFormProps) => {
                   mask: cardCVVMask
                 })
 
+                const validationStatus =
+                  cardValidator.cardholderName(masked).isValid ||
+                  cardValidator.cardholderName(masked).isPotentiallyValid
+
                 setCardDetailsValidation((prev) => {
                   return {
                     ...prev,
-                    cvv: cardValidator.cvv(masked).isValid
+                    cvv: validationStatus,
+                    messages: {
+                      ...prev.messages,
+                      cvv: !validationStatus ? 'Invalid CVV' : ''
+                    }
                   }
                 })
 
