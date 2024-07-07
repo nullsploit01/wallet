@@ -1,4 +1,5 @@
-import { ScrollView, Text, View } from 'tamagui'
+import CardDetails from '../../molecules/card-details'
+import { ScrollView, View } from 'tamagui'
 
 import DialogBox from '@/src/components/molecules/dialog-box'
 import CardForm from '@/src/components/organisms/card-form'
@@ -16,7 +17,7 @@ const Cards = ({ type }: ICardsProps) => {
       <ScrollView>
         {cards.map((card) => {
           if (card.type === type) {
-            return <Text key={card.id}>{card.label}</Text>
+            return <CardDetails card={card} key={card.id} />
           }
         })}
       </ScrollView>

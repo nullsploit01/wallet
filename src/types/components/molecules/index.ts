@@ -1,5 +1,7 @@
 import { ReactNode } from 'react'
 
+import { ICard } from '@/src/types/models/cards'
+
 export interface ITabsListItem {
   label: string
   value: string
@@ -15,4 +17,8 @@ export interface IDialogBoxProps {
   title: string | ReactNode
   description?: string | ReactNode
   content?: ReactNode
+}
+
+export interface ICardDetailsProps {
+  card: ICard
 }
