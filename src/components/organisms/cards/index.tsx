@@ -17,7 +17,11 @@ const Cards = ({ type }: ICardsProps) => {
       <ScrollView>
         {cards.map((card) => {
           if (card.type === type) {
-            return <CardDetails card={card} key={card.id} />
+            return (
+              <View key={card.id} margin="$3">
+                <CardDetails card={card} />
+              </View>
+            )
           }
         })}
       </ScrollView>

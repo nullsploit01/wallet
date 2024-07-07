@@ -16,7 +16,7 @@ const TextInput = ({ label, error, onValueChange, ...rest }: ITextInputProps) =>
         id={ID}
         borderColor="$gray10"
         onChange={(e) => {
-          const v = e.nativeEvent.text?.trim()
+          const v = e.nativeEvent.text
           onValueChange?.(v)
         }}
         {...rest}
