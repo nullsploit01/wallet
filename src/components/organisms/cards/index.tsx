@@ -1,6 +1,6 @@
-import CardDetails from '../../molecules/card-details'
 import { ScrollView, View } from 'tamagui'
 
+import CardDetails from '@/src/components/molecules/card-details'
 import DialogBox from '@/src/components/molecules/dialog-box'
 import CardForm from '@/src/components/organisms/card-form'
 import { useCardStore } from '@/src/stores/use-cards'
