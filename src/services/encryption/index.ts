@@ -7,31 +7,39 @@ import { generateRandomId } from '@/src/utils/general'
 class EncryptionService {
   private encryptionKeyStorageKey = 'ENCRYPTION_KEY'
 
-  encrypt = (key: string, value: Record<string, any>) => {
-    return CryptoES.AES.encrypt(JSON.stringify(value), key)
+  encrypt = async (value: Record<string, any>) => {
+    const key = await this.getEncryptionKey()
+
+    if (!key?.key) {
+      throw new Error('Encryption key is not defined')
+    }
+
+    return CryptoES.AES.encrypt(JSON.stringify(value), key.key)
   }
 
-  decrypt = (key: string, encryptedText: CipherParams) => {
-    const decryptedText = CryptoES.AES.decrypt(encryptedText, key)
+  decrypt = async (encryptedText: CipherParams) => {
+    const key = await this.getEncryptionKey()
+
+    if (!key?.key) {
+      throw new Error('Encryption key is not defined')
+    }
+
+    const decryptedText = CryptoES.AES.decrypt(encryptedText, key.key)
     return decryptedText.toString(CryptoES.enc.Utf8)
   }
 
   setEncryptionKey = async () => {
-    if (!(await this.getEncryptionKey())) {
-      await secureStorageService.storeItem(this.encryptionKeyStorageKey, {
-        key: generateRandomId(256)
-      })
+    if (await this.getEncryptionKey()) {
+      return
     }
+
+    await secureStorageService.storeItem(this.encryptionKeyStorageKey, {
+      key: generateRandomId(256)
+    })
   }
 
   getEncryptionKey = async () => {
-    try {
-      const encryptionKey = await secureStorageService.getItem(this.encryptionKeyStorageKey)
-      if (!encryptionKey) return null
-      return JSON.parse(encryptionKey)
-    } catch {
-      return null
-    }
+    return await secureStorageService.getItem(this.encryptionKeyStorageKey)
   }
 }
 

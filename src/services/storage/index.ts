@@ -10,7 +10,6 @@ class StorageService {
     try {
       const value = await AsyncStorage.getItem(key)
       if (!value) return null
-
       return JSON.parse(value)
     } catch {
       return null
