@@ -15,7 +15,14 @@ export const useCardStore = create<ICardStoreState & ICardStoreActions>((set, ge
   },
 
   getCards: async () => {
+    return get().cards.sort(
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    )
+  },
+
+  getCardsFromStorage: async () => {
     const storedCards = (await cardService.getCards()).cards as ICard[]
+    set((state) => ({ cards: [...storedCards, ...state.cards] }))
     return storedCards.sort(
       (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     )

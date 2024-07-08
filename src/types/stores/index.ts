@@ -7,4 +7,5 @@ export interface ICardStoreState {
 export interface ICardStoreActions {
   addCard: (card: ICard) => Promise<void>
   getCards: () => Promise<ICard[]>
+  getCardsFromStorage: () => Promise<ICard[]>
 }

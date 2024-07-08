@@ -9,14 +9,14 @@ import { ICardsProps } from '@/src/types/components/organisms'
 import { CardTypes, ICard } from '@/src/types/models/cards'
 
 const Cards = ({ type }: ICardsProps) => {
-  const { getCards } = useCardStore()
+  const { getCards, cards } = useCardStore()
   const [_cards, setCards] = useState<ICard[]>([])
 
   useEffect(() => {
     getCards().then((cards) => {
       setCards(cards)
     })
-  }, [])
+  }, [cards])
 
   const cardType = type === CardTypes.Credit ? 'Credit' : 'Debit'
 
