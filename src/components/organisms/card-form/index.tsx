@@ -5,6 +5,7 @@ import { formatWithMask } from 'react-native-mask-input'
 import { Button, Form, Spinner, View, XStack, YStack } from 'tamagui'
 
 import TextInput from '@/src/components/atoms/text-input/input'
+import { useNotification } from '@/src/hooks/notification'
 import { useCardStore } from '@/src/stores/use-cards'
 import { ICardFormProps } from '@/src/types/components/organisms'
 import { ICard } from '@/src/types/models/cards'
@@ -51,8 +52,9 @@ const CardForm = ({ type }: ICardFormProps) => {
   })
 
   const { addCard } = useCardStore()
+  const { showNotification } = useNotification()
 
-  const onSave = () => {
+  const onSave = async () => {
     if (!isCardValid()) {
       if (!_cardDetails.name?.trim()) {
         setCardDetailsValidation((prev) => {
@@ -108,7 +110,8 @@ const CardForm = ({ type }: ICardFormProps) => {
       return
     }
 
-    addCard(_cardDetails)
+    await addCard(_cardDetails)
+    showNotification({ title: 'Success', message: 'Card Added Successfully!', type: 'success' })
     router.replace({ pathname: '/', params: { type } })
   }
 
