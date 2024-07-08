@@ -1,13 +1,20 @@
+import * as Clipboard from 'expo-clipboard'
 import React from 'react'
 import { Card, Paragraph, Text, View, XStack } from 'tamagui'
 
 import { ICardDetailsProps } from '@/src/types/components/molecules'
 
 const CardDetails = ({ card }: ICardDetailsProps) => {
+  const copyCardNumberToClipboard = async () => {
+    Clipboard.setStringAsync(card.number)
+  }
+
   return (
     <Card elevate shadowColor="$accentColor" borderTopColor="$gray10Dark" borderTopWidth="$1.5">
       <View margin="$3">
-        <Text fontSize="$9">{card.number}</Text>
+        <Text onPress={copyCardNumberToClipboard} fontSize="$9">
+          {card.number}
+        </Text>
         <XStack justifyContent="space-between" marginRight="$7">
           <XStack>
             <Paragraph fontSize="$5" fontWeight="800" marginRight="$3">
