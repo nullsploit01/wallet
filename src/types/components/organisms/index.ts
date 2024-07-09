@@ -11,3 +11,7 @@ export interface ICardFormProps {
 export interface ICardTabsProps {
   active?: CardTypes
 }
+
+export interface IAuthenticateProps {
+  initialiseApplication: () => Promise<void>
+}
