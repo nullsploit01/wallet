@@ -11,7 +11,8 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
   const { showNotification } = useNotification()
 
   const copyCardNumberToClipboard = async () => {
-    await Clipboard.setStringAsync(card.number)
+    const cardNumber = card.number.split(' ').join('')
+    await Clipboard.setStringAsync(cardNumber)
     showNotification({
       title: 'Success',
       message: 'Card number copied successfully',
