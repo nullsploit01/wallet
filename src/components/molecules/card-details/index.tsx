@@ -14,9 +14,8 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
     const cardNumber = card.number.split(' ').join('')
     await Clipboard.setStringAsync(cardNumber)
     showNotification({
-      title: 'Success',
-      message: 'Card number copied successfully',
-      type: 'success'
+      title: 'Copied!',
+      message: 'Card number copied successfully'
     })
   }
 
@@ -32,20 +31,20 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
           </TouchableOpacity>
         </XStack>
         <XStack justifyContent="space-between" marginRight="$7">
-          <XStack>
-            <Paragraph fontSize="$5" fontWeight="800" marginRight="$3">
+          <XStack alignItems="center">
+            <Paragraph fontSize="$5" fontWeight="800" marginRight="$2">
               Valid Thru:
             </Paragraph>
             <Text>{card.expiry}</Text>
           </XStack>
-          <XStack>
-            <Paragraph fontSize="$5" fontWeight="800" marginRight="$3">
+          <XStack alignItems="center">
+            <Paragraph fontSize="$5" fontWeight="800" marginRight="$2">
               CVV:
             </Paragraph>
             <Text>{card.cvv}</Text>
           </XStack>
         </XStack>
-        <XStack justifyContent="flex-start">
+        <XStack marginTop="$2" justifyContent="flex-start">
           <Text fontSize="$7">{card.name}</Text>
         </XStack>
         <XStack justifyContent="flex-end">
