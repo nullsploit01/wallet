@@ -1,7 +1,7 @@
 {
   "name": "wallet",
   "main": "expo-router/entry",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "scripts": {
     "start": "expo start --port 15353",
     "dev": "expo start --dev-client -c --port 15353",
