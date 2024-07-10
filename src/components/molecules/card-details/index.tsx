@@ -1,20 +1,35 @@
+import { AntDesign } from '@expo/vector-icons'
 import * as Clipboard from 'expo-clipboard'
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
 import { Card, Paragraph, Text, View, XStack } from 'tamagui'
 
+import { useNotification } from '@/src/hooks/notification'
 import { ICardDetailsProps } from '@/src/types/components/molecules'
 
 const CardDetails = ({ card }: ICardDetailsProps) => {
+  const { showNotification } = useNotification()
+
   const copyCardNumberToClipboard = async () => {
-    Clipboard.setStringAsync(card.number)
+    await Clipboard.setStringAsync(card.number)
+    showNotification({
+      title: 'Success',
+      message: 'Card number copied successfully',
+      type: 'success'
+    })
   }
 
   return (
     <Card elevate shadowColor="$accentColor" borderTopColor="$gray10Dark" borderTopWidth="$1.5">
       <View margin="$3">
-        <Text onPress={copyCardNumberToClipboard} fontSize="$9">
-          {card.number}
-        </Text>
+        <XStack alignItems="center">
+          <Text marginRight="$3" fontSize="$9">
+            {card.number}
+          </Text>
+          <TouchableOpacity onPress={copyCardNumberToClipboard}>
+            <AntDesign name="copy1" size={24} color="black" />
+          </TouchableOpacity>
+        </XStack>
         <XStack justifyContent="space-between" marginRight="$7">
           <XStack>
             <Paragraph fontSize="$5" fontWeight="800" marginRight="$3">
