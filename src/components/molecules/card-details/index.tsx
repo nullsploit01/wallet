@@ -1,5 +1,6 @@
 import { AntDesign } from '@expo/vector-icons'
 import * as Clipboard from 'expo-clipboard'
+import { Image } from 'expo-image'
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Card, Paragraph, Text, View, XStack } from 'tamagui'
@@ -20,35 +21,53 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
   }
 
   return (
-    <Card elevate shadowColor="$accentColor" borderTopColor="$gray10Dark" borderTopWidth="$1.5">
+    <Card
+      elevate
+      shadowColor="$accentColor"
+      backgroundColor="$gray10Dark"
+      borderColor="$gray10"
+      borderWidth="$1.5"
+    >
       <View margin="$3">
+        <XStack>
+          <Image source="aa" contentFit="cover" transition={1000} />
+        </XStack>
+        <XStack justifyContent="flex-end">
+          <Paragraph fontSize={20} color="$gray1">
+            Credit Card
+          </Paragraph>
+        </XStack>
         <XStack alignItems="center">
-          <Text marginRight="$3" fontSize="$9">
+          <Text marginRight="$3" fontSize="$9" color="$gray1">
             {card.number}
           </Text>
           <TouchableOpacity onPress={copyCardNumberToClipboard}>
-            <AntDesign name="copy1" size={24} color="black" />
+            <AntDesign name="copy1" size={24} color="white" />
           </TouchableOpacity>
         </XStack>
         <XStack justifyContent="space-between" marginRight="$7">
           <XStack alignItems="center">
-            <Paragraph fontSize="$5" fontWeight="800" marginRight="$2">
+            <Paragraph color="$gray1" fontSize="$5" fontWeight="800" marginRight="$2">
               Valid Thru:
             </Paragraph>
-            <Text>{card.expiry}</Text>
+            <Text color="$gray1">{card.expiry}</Text>
           </XStack>
           <XStack alignItems="center">
-            <Paragraph fontSize="$5" fontWeight="800" marginRight="$2">
+            <Paragraph color="$gray1" fontSize="$5" fontWeight="800" marginRight="$2">
               CVV:
             </Paragraph>
-            <Text>{card.cvv}</Text>
+            <Text color="$gray1">{card.cvv}</Text>
           </XStack>
         </XStack>
         <XStack marginTop="$2" justifyContent="flex-start">
-          <Text fontSize="$7">{card.name}</Text>
+          <Text color="$gray1" fontSize="$7">
+            {card.name}
+          </Text>
         </XStack>
         <XStack justifyContent="flex-end">
-          <Text fontSize="$5">{card.label}</Text>
+          <Text color="$gray1" fontSize="$5">
+            {card.label}
+          </Text>
         </XStack>
       </View>
     </Card>
