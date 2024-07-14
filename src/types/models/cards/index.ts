@@ -1,3 +1,5 @@
+import { CardProviders } from '@/src/constants/card'
+
 export enum CardTypes {
   Credit,
   Debit
@@ -11,6 +13,7 @@ export interface ICard {
   expiry: string
   name: string
   label: string
+  cardProvider: keyof typeof CardProviders | null
   createdAt: Date
   updatedAt: Date
 }

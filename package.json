@@ -23,6 +23,7 @@
     "@react-navigation/native": "^6.0.2",
     "@tamagui/config": "^1.101.4",
     "card-validator": "^10.0.0",
+    "credit-card-type": "^10.0.1",
     "crypto-es": "^2.1.0",
     "expo": "~51.0.20",
     "expo-asset": "~10.0.10",

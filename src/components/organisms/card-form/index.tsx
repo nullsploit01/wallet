@@ -9,6 +9,7 @@ import { useNotification } from '@/src/hooks/notification'
 import { useCardStore } from '@/src/stores/use-cards'
 import { ICardFormProps } from '@/src/types/components/organisms'
 import { ICard } from '@/src/types/models/cards'
+import { getCardProvider } from '@/src/utils/card'
 
 const CardForm = ({ type }: ICardFormProps) => {
   const cardNumberMask = [
@@ -175,7 +176,7 @@ const CardForm = ({ type }: ICardFormProps) => {
           value={_cardDetails.number}
           keyboardType="numeric"
           autoComplete="cc-number"
-          placeholder="4111 4322 5675"
+          placeholder="4111 1111 1111 1111"
           label="Card Number"
           error={
             !_cardDetailsValidation.number ? _cardDetailsValidation.messages.number : undefined
@@ -202,7 +203,11 @@ const CardForm = ({ type }: ICardFormProps) => {
             })
 
             setCardDetails((prev) => {
-              return { ...prev, number: masked }
+              return {
+                ...prev,
+                number: masked,
+                cardProvider: getCardProvider(cardValidator.number(masked).card?.type as any)
+              }
             })
           }}
         />
