@@ -10,7 +10,10 @@ import { useNotification } from '@/src/hooks/notification'
 import { ICardDetailsProps } from '@/src/types/components/molecules'
 
 const CardDetails = ({ card }: ICardDetailsProps) => {
-  const [assets] = useAssets([require('@/src/assets/images/credit_card.png')])
+  const [assets] = useAssets([
+    require('@/src/assets/images/credit_card.png'),
+    require('@/src/assets/images/wifi.png')
+  ])
 
   const { showNotification } = useNotification()
 
@@ -37,9 +40,14 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
             Credit Card
           </Paragraph>
         </XStack>
-        {assets?.length && (
-          <Image style={{ width: 100, height: 100 }} source={{ uri: assets[0].uri }} />
-        )}
+        <XStack marginVertical="$3" justifyContent="space-between" alignContent="center">
+          {assets?.length && (
+            <Image style={{ width: 50, height: 80 }} source={{ uri: assets[0].uri }} />
+          )}
+          {assets?.length && assets?.length > 1 && (
+            <Image style={{ width: 50, height: 80 }} source={{ uri: assets[1].uri }} />
+          )}
+        </XStack>
         <XStack alignItems="center">
           <Text marginRight="$3" fontSize="$9" color="$gray1">
             {card.number}
