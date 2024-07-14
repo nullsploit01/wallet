@@ -4,6 +4,7 @@ import * as Clipboard from 'expo-clipboard'
 import { Image } from 'expo-image'
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
+import { PaymentIcon } from 'react-native-payment-icons'
 import { Card, Paragraph, Text, View, XStack } from 'tamagui'
 
 import { useNotification } from '@/src/hooks/notification'
@@ -74,10 +75,13 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
             {card.name}
           </Text>
         </XStack>
-        <XStack justifyContent="flex-end">
+        <XStack justifyContent="flex-end" alignItems="center">
           <Text color="$gray1" fontSize="$5">
             {card.label}
           </Text>
+          <View marginLeft="$2">
+            {card.cardProvider && <PaymentIcon type={card.cardProvider} />}
+          </View>
         </XStack>
       </View>
     </Card>
