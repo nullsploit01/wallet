@@ -8,6 +8,7 @@ import { Card, Paragraph, Text, View, XStack } from 'tamagui'
 
 import { useNotification } from '@/src/hooks/notification'
 import { ICardDetailsProps } from '@/src/types/components/molecules'
+import { CardTypes } from '@/src/types/models/cards'
 
 const CardDetails = ({ card }: ICardDetailsProps) => {
   const [assets] = useAssets([
@@ -30,17 +31,17 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
     <Card
       elevate
       shadowColor="$accentColor"
-      backgroundColor="$gray10Dark"
+      backgroundColor={card.type === CardTypes.Credit ? '$gray9Dark' : 'black'}
       borderColor="$gray10"
       borderWidth="$1.5"
     >
       <View margin="$3">
-        <XStack justifyContent="flex-end">
+        <XStack justifyContent="space-between">
           <Paragraph fontSize={20} color="$gray1">
-            Credit Card
+            {card.type === CardTypes.Credit ? 'Credit' : 'Debit'} Card
           </Paragraph>
         </XStack>
-        <XStack marginTop="$3" justifyContent="space-between" alignContent="center">
+        <XStack justifyContent="space-between" alignContent="center">
           {assets?.length && (
             <Image style={{ width: 50, height: 70 }} source={{ uri: assets[0].uri }} />
           )}
@@ -48,8 +49,8 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
             <Image style={{ width: 50, height: 70 }} source={{ uri: assets[1].uri }} />
           )}
         </XStack>
-        <XStack alignItems="center">
-          <Text fontFamily={'OswaldBold' as any} marginRight="$3" fontSize="$9" color="$gray1">
+        <XStack alignItems="center" justifyContent="space-between">
+          <Text fontFamily={'OswaldBold' as any} marginRight="$1" fontSize={35} color="$gray1">
             {card.number}
           </Text>
           <TouchableOpacity onPress={copyCardNumberToClipboard}>
