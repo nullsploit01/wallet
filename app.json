@@ -32,7 +32,12 @@
       "expo-font",
       "expo-secure-store",
       "expo-local-authentication",
-      "expo-asset"
+      [
+        "expo-asset",
+        {
+          "assets": ["./src/assets"]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

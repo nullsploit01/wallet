@@ -1,4 +1,5 @@
 import { AntDesign } from '@expo/vector-icons'
+import { useAssets } from 'expo-asset'
 import * as Clipboard from 'expo-clipboard'
 import { Image } from 'expo-image'
 import React from 'react'
@@ -9,6 +10,8 @@ import { useNotification } from '@/src/hooks/notification'
 import { ICardDetailsProps } from '@/src/types/components/molecules'
 
 const CardDetails = ({ card }: ICardDetailsProps) => {
+  const [assets] = useAssets([require('@/src/assets/images/credit_card.png')])
+
   const { showNotification } = useNotification()
 
   const copyCardNumberToClipboard = async () => {
@@ -29,14 +32,14 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
       borderWidth="$1.5"
     >
       <View margin="$3">
-        <XStack>
-          <Image source="aa" contentFit="cover" transition={1000} />
-        </XStack>
         <XStack justifyContent="flex-end">
           <Paragraph fontSize={20} color="$gray1">
             Credit Card
           </Paragraph>
         </XStack>
+        {assets?.length && (
+          <Image style={{ width: 100, height: 100 }} source={{ uri: assets[0].uri }} />
+        )}
         <XStack alignItems="center">
           <Text marginRight="$3" fontSize="$9" color="$gray1">
             {card.number}
