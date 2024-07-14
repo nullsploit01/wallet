@@ -40,16 +40,16 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
             Credit Card
           </Paragraph>
         </XStack>
-        <XStack marginVertical="$3" justifyContent="space-between" alignContent="center">
+        <XStack marginTop="$3" justifyContent="space-between" alignContent="center">
           {assets?.length && (
-            <Image style={{ width: 50, height: 80 }} source={{ uri: assets[0].uri }} />
+            <Image style={{ width: 50, height: 70 }} source={{ uri: assets[0].uri }} />
           )}
           {assets?.length && assets?.length > 1 && (
-            <Image style={{ width: 50, height: 80 }} source={{ uri: assets[1].uri }} />
+            <Image style={{ width: 50, height: 70 }} source={{ uri: assets[1].uri }} />
           )}
         </XStack>
         <XStack alignItems="center">
-          <Text marginRight="$3" fontSize="$9" color="$gray1">
+          <Text fontFamily={'OswaldBold' as any} marginRight="$3" fontSize="$9" color="$gray1">
             {card.number}
           </Text>
           <TouchableOpacity onPress={copyCardNumberToClipboard}>

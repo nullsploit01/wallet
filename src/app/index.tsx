@@ -11,7 +11,8 @@ const HomePage = () => {
 
   const [loaded] = useFonts({
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
-    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf')
+    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
+    OswaldBold: require('@/src/assets/fonts/Oswald-Bold.ttf')
   })
 
   if (!loaded) {

@@ -28,16 +28,21 @@
       "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
-      "expo-font",
-      "expo-secure-store",
-      "expo-local-authentication",
+      [
+        "expo-font",
+        {
+          "fonts": ["./src/assets/fonts/Oswald-Bold.ttf"]
+        }
+      ],
       [
         "expo-asset",
         {
           "assets": ["./src/assets"]
         }
-      ]
+      ],
+      "expo-router",
+      "expo-secure-store",
+      "expo-local-authentication"
     ],
     "experiments": {
       "typedRoutes": true
