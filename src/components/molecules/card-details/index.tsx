@@ -35,12 +35,10 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
       borderColor="$gray10"
       borderWidth="$1.5"
     >
-      <View margin="$3">
-        <XStack justifyContent="space-between">
-          <Paragraph fontSize={20} color="$gray1">
-            {card.type === CardTypes.Credit ? 'Credit' : 'Debit'} Card
-          </Paragraph>
-        </XStack>
+      <View margin="$2">
+        <Paragraph fontSize={20} color="$gray1">
+          {card.type === CardTypes.Credit ? 'Credit' : 'Debit'} Card
+        </Paragraph>
         <XStack justifyContent="space-between" alignContent="center">
           {assets?.length && (
             <Image style={{ width: 50, height: 70 }} source={{ uri: assets[0].uri }} />

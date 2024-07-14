@@ -2,6 +2,7 @@ import cardValidator from 'card-validator'
 import { router } from 'expo-router'
 import { useState } from 'react'
 import { formatWithMask } from 'react-native-mask-input'
+import { PaymentIcon } from 'react-native-payment-icons'
 import { Button, Form, Spinner, View, XStack, YStack } from 'tamagui'
 
 import TextInput from '@/src/components/atoms/text-input/input'
@@ -170,47 +171,55 @@ const CardForm = ({ type }: ICardFormProps) => {
             })
           }}
         />
-        <TextInput
-          marginBottom="$1.5"
-          width="100%"
-          value={_cardDetails.number}
-          keyboardType="numeric"
-          autoComplete="cc-number"
-          placeholder="4111 1111 1111 1111"
-          label="Card Number"
-          error={
-            !_cardDetailsValidation.number ? _cardDetailsValidation.messages.number : undefined
-          }
-          onValueChange={(v) => {
-            const { masked } = formatWithMask({
-              text: v,
-              mask: cardNumberMask
-            })
-
-            const validationStatus =
-              cardValidator.number(masked).isValid ||
-              cardValidator.number(masked).isPotentiallyValid
-
-            setCardDetailsValidation((prev) => {
-              return {
-                ...prev,
-                number: validationStatus,
-                messages: {
-                  ...prev.messages,
-                  number: !validationStatus ? 'Invalid Card Number' : ''
-                }
+        <XStack alignItems="flex-end" justifyContent="space-between">
+          <View width="80%">
+            <TextInput
+              marginBottom="$1.5"
+              width="100%"
+              value={_cardDetails.number}
+              keyboardType="numeric"
+              autoComplete="cc-number"
+              placeholder="4111 1111 1111 1111"
+              label="Card Number"
+              error={
+                !_cardDetailsValidation.number ? _cardDetailsValidation.messages.number : undefined
               }
-            })
+              onValueChange={(v) => {
+                const { masked } = formatWithMask({
+                  text: v,
+                  mask: cardNumberMask
+                })
 
-            setCardDetails((prev) => {
-              return {
-                ...prev,
-                number: masked,
-                cardProvider: getCardProvider(cardValidator.number(masked).card?.type as any)
-              }
-            })
-          }}
-        />
+                const validationStatus =
+                  cardValidator.number(masked).isValid ||
+                  cardValidator.number(masked).isPotentiallyValid
+
+                setCardDetailsValidation((prev) => {
+                  return {
+                    ...prev,
+                    number: validationStatus,
+                    messages: {
+                      ...prev.messages,
+                      number: !validationStatus ? 'Invalid Card Number' : ''
+                    }
+                  }
+                })
+
+                setCardDetails((prev) => {
+                  return {
+                    ...prev,
+                    number: masked,
+                    cardProvider: getCardProvider(cardValidator.number(masked).card?.type as any)
+                  }
+                })
+              }}
+            />
+          </View>
+          <View marginBottom="$3">
+            {_cardDetails.cardProvider && <PaymentIcon type={_cardDetails.cardProvider} />}
+          </View>
+        </XStack>
+
         <XStack justifyContent="space-between">
           <View width="45%">
             <TextInput
