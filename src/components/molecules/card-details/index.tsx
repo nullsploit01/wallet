@@ -1,4 +1,5 @@
-import { AntDesign } from '@expo/vector-icons'
+import PopoverMenu from '../../atoms/popover-menu'
+import { AntDesign, Entypo } from '@expo/vector-icons'
 import { useAssets } from 'expo-asset'
 import * as Clipboard from 'expo-clipboard'
 import { Image } from 'expo-image'
@@ -37,9 +38,21 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
       borderWidth="$1.5"
     >
       <View margin="$2">
-        <Paragraph fontSize={20} color="$gray1">
-          {card.type === CardTypes.Credit ? 'Credit' : 'Debit'} Card
-        </Paragraph>
+        <XStack justifyContent="space-between" alignItems="center">
+          <Paragraph fontSize={20} color="$gray1">
+            {card.type === CardTypes.Credit ? 'Credit' : 'Debit'} Card
+          </Paragraph>
+          <PopoverMenu
+            keepChildrenMounted={false}
+            content={
+              <View>
+                <Text>Test</Text>
+              </View>
+            }
+          >
+            <Entypo name="dots-three-vertical" size={24} color="white" />
+          </PopoverMenu>
+        </XStack>
         <XStack justifyContent="space-between" alignContent="center">
           {assets?.length && (
             <Image style={{ width: 50, height: 70 }} source={{ uri: assets[0].uri }} />

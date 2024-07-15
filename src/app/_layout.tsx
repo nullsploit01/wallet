@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router'
 import { Fragment, useEffect, useState } from 'react'
-import { TamaguiProvider, Text } from 'tamagui'
+import { PortalProvider, TamaguiProvider, Text } from 'tamagui'
 
 import Authenticate from '@/src/components/organisms/authenticate'
 import { NotificationProvider } from '@/src/ctx/notification'
@@ -43,15 +43,17 @@ export default function RootLayout() {
     <Fragment>
       <NotificationProvider>
         <TamaguiProvider config={appConfig}>
-          {!_canAuthenticate.isSupported ? (
-            <Text>Device Not Suported</Text>
-          ) : !_canAuthenticate.isSuccess ? (
-            <Authenticate initialiseApplication={initialiseApplication} />
-          ) : (
-            <Stack>
-              <Stack.Screen name="index" options={{ headerShown: false }} />
-            </Stack>
-          )}
+          <PortalProvider shouldAddRootHost>
+            {!_canAuthenticate.isSupported ? (
+              <Text>Device Not Suported</Text>
+            ) : !_canAuthenticate.isSuccess ? (
+              <Authenticate initialiseApplication={initialiseApplication} />
+            ) : (
+              <Stack>
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+              </Stack>
+            )}
+          </PortalProvider>
         </TamaguiProvider>
       </NotificationProvider>
     </Fragment>
