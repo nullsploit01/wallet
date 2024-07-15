@@ -5,14 +5,14 @@ import { IPopoverMenuProps } from '@/src/types/components/atoms'
 
 const PopoverMenu = ({ children, content, ...props }: IPopoverMenuProps) => {
   return (
-    <Popover size="$1" allowFlip placement="top" {...props}>
+    <Popover allowFlip placement="top" {...props}>
       <Popover.Trigger asChild>
         <TouchableOpacity>{children}</TouchableOpacity>
       </Popover.Trigger>
 
       <Adapt when="sm">
         <Popover.Sheet modal dismissOnSnapToBottom>
-          <Popover.Sheet.Frame padding="$4">
+          <Popover.Sheet.Frame>
             <Adapt.Contents />
           </Popover.Sheet.Frame>
           <Popover.Sheet.Overlay animation="lazy" exitStyle={{ opacity: 0 }} />
