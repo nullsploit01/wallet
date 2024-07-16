@@ -8,13 +8,13 @@ import { generateRandomId } from '@/src/utils/general'
 export const useCardStore = create<ICardStoreState & ICardStoreActions>((set, get) => ({
   cards: [],
 
-  addCard: async (card: ICard) => {
+  addCard: (card: ICard) => {
     card = { ...card, createdAt: new Date(), updatedAt: new Date(), id: generateRandomId() }
     set((state) => ({ cards: [card, ...state.cards] }))
-    await cardService.storeCards(get().cards)
+    cardService.storeCards(get().cards)
   },
 
-  getCards: async () => {
+  getCards: () => {
     return get().cards.sort(
       (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     )
@@ -36,5 +36,11 @@ export const useCardStore = create<ICardStoreState & ICardStoreActions>((set, ge
     return combinedCards.sort(
       (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     )
+  },
+
+  removeCard: (card: ICard) => {
+    const filteredCards = get().cards.filter((c) => c.id !== card.id)
+    set(() => ({ cards: [...filteredCards] }))
+    cardService.storeCards(filteredCards)
   }
 }))

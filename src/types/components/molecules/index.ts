@@ -22,3 +22,7 @@ export interface IDialogBoxProps {
 export interface ICardDetailsProps {
   card: ICard
 }
+
+export interface ICardMenuProps {
+  card: ICard
+}

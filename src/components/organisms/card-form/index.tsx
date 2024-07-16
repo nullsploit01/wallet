@@ -112,7 +112,7 @@ const CardForm = ({ type }: ICardFormProps) => {
       return
     }
 
-    await addCard(_cardDetails)
+    addCard(_cardDetails)
     showNotification({ title: 'Success', message: 'Card Added Successfully!', type: 'success' })
     router.replace({ pathname: '/', params: { type } })
   }

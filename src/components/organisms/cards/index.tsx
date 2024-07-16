@@ -13,9 +13,8 @@ const Cards = ({ type }: ICardsProps) => {
   const [_cards, setCards] = useState<ICard[]>([])
 
   useEffect(() => {
-    getCards().then((cards) => {
-      setCards(cards)
-    })
+    const cards = getCards()
+    setCards(cards)
   }, [cards])
 
   const cardType = type === CardTypes.Credit ? 'Credit' : 'Debit'

@@ -2,22 +2,31 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
 import { Separator, Text, View, XStack } from 'tamagui'
 
-const CardMenu = () => {
+import { useCardStore } from '@/src/stores/use-cards'
+import { ICardMenuProps } from '@/src/types/components/molecules'
+
+const CardMenu = ({ card }: ICardMenuProps) => {
+  const { removeCard } = useCardStore()
+
+  const handleDeleteCard = () => {
+    removeCard(card)
+  }
+
   return (
     <View margin="$4" flex={1}>
       <TouchableOpacity>
         <XStack alignItems="center" marginVertical="$3">
           <AntDesign name="edit" size={36} color="black" />
-          <Text fontSize={25} marginLeft="$5">
+          <Text fontSize={20} marginLeft="$5">
             Edit Card
           </Text>
         </XStack>
       </TouchableOpacity>
       <Separator borderColor="$gray8Light" />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleDeleteCard}>
         <XStack alignItems="center" marginVertical="$3">
           <MaterialIcons name="delete" size={36} color="red" />
-          <Text fontSize={25} marginLeft="$5">
+          <Text fontSize={20} marginLeft="$5">
             Delete Card
           </Text>
         </XStack>

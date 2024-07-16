@@ -43,7 +43,7 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
           <Paragraph fontSize={20} color="$gray1">
             {card.type === CardTypes.Credit ? 'Credit' : 'Debit'} Card
           </Paragraph>
-          <PopoverMenu keepChildrenMounted={false} content={<CardMenu />}>
+          <PopoverMenu keepChildrenMounted={false} content={<CardMenu card={card} />}>
             <Entypo name="dots-three-vertical" size={24} color="white" />
           </PopoverMenu>
         </XStack>
