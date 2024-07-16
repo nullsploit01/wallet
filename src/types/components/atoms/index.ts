@@ -11,3 +11,10 @@ export interface IPopoverMenuProps extends PopoverProps {
   content: ReactNode
   children: ReactNode
 }
+
+export interface IDialogBoxProps {
+  label: string
+  title: string | ReactNode
+  description?: string | ReactNode
+  content?: ReactNode
+}

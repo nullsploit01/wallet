@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { ScrollView, View } from 'tamagui'
 
+import DialogBox from '@/src/components/atoms/dialog-box'
 import CardDetails from '@/src/components/molecules/card-details'
-import DialogBox from '@/src/components/molecules/dialog-box'
 import CardForm from '@/src/components/organisms/card-form'
 import { useCardStore } from '@/src/stores/use-cards'
 import { ICardsProps } from '@/src/types/components/organisms'

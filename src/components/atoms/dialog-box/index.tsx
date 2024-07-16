@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal } from 'react-native'
 import { Button, H3, View, YStack } from 'tamagui'
 
-import { IDialogBoxProps } from '@/src/types/components/molecules'
+import { IDialogBoxProps } from '@/src/types/components/atoms'
 
 const DialogBox = ({ label, title, content }: IDialogBoxProps) => {
   const [modalVisible, setModalVisible] = useState(false)
