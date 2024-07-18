@@ -12,7 +12,7 @@ import { ICardFormProps } from '@/src/types/components/organisms'
 import { ICard } from '@/src/types/models/cards'
 import { getCardProvider } from '@/src/utils/card'
 
-const CardForm = ({ type }: ICardFormProps) => {
+const CardForm = ({ type, card }: ICardFormProps) => {
   const cardNumberMask = [
     /\d/,
     /\d/,
@@ -39,7 +39,7 @@ const CardForm = ({ type }: ICardFormProps) => {
   const cardCVVMask = [/\d/, /\d/, /\d/, /\d/]
 
   const [_status, setStatus] = useState<'off' | 'submitting' | 'submitted'>('off')
-  const [_cardDetails, setCardDetails] = useState<ICard>({ type } as ICard)
+  const [_cardDetails, setCardDetails] = useState<ICard>(card ? card : ({ type } as ICard))
   const [_cardDetailsValidation, setCardDetailsValidation] = useState({
     number: true,
     cvv: true,

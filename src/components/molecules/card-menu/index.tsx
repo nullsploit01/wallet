@@ -1,4 +1,5 @@
 import DialogBox from '../../atoms/dialog-box'
+import CardForm from '../../organisms/card-form'
 import { AntDesign, MaterialIcons } from '@expo/vector-icons'
 import { Fragment } from 'react'
 import { TouchableOpacity } from 'react-native'
@@ -6,9 +7,11 @@ import { Separator, Text, View, XStack } from 'tamagui'
 
 import { useCardStore } from '@/src/stores/use-cards'
 import { ICardMenuProps } from '@/src/types/components/molecules'
+import { CardTypes } from '@/src/types/models/cards'
 
 const CardMenu = ({ card }: ICardMenuProps) => {
   const { removeCard } = useCardStore()
+  const cardType = card.type === CardTypes.Credit ? 'Credit' : 'Debit'
 
   const handleDeleteCard = () => {
     removeCard(card)
@@ -27,8 +30,8 @@ const CardMenu = ({ card }: ICardMenuProps) => {
             </XStack>
           </Fragment>
         }
-        content={<Text>A</Text>}
-        title="aa"
+        content={<CardForm type={card.type} isEdit card={card} />}
+        title={`Edit ${cardType} Card`}
       />
       <Separator borderColor="$gray8Light" />
       <TouchableOpacity onPress={handleDeleteCard}>
