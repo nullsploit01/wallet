@@ -9,12 +9,12 @@ import { ICardsProps } from '@/src/types/components/organisms'
 import { CardTypes } from '@/src/types/models/cards'
 
 const Cards = ({ type }: ICardsProps) => {
-  const { cards } = useCardStore()
+  const { getCards } = useCardStore()
 
   const cardType = type === CardTypes.Credit ? 'Credit' : 'Debit'
 
   const getCardsByType = () => {
-    return cards.filter((card) => card.type === type)
+    return getCards().filter((card) => card.type === type)
   }
 
   return (

@@ -12,7 +12,7 @@ import { ICardFormProps } from '@/src/types/components/organisms'
 import { ICard } from '@/src/types/models/cards'
 import { getCardProvider } from '@/src/utils/card'
 
-const CardForm = ({ type, card }: ICardFormProps) => {
+const CardForm = ({ type, card, isEdit }: ICardFormProps) => {
   const cardNumberMask = [
     /\d/,
     /\d/,
@@ -53,68 +53,29 @@ const CardForm = ({ type, card }: ICardFormProps) => {
     }
   })
 
-  const { addCard } = useCardStore()
+  const { addCard, editCard } = useCardStore()
   const { showNotification } = useNotification()
 
-  const onSave = async () => {
+  const onSave = () => {
     if (!isCardValid()) {
-      if (!_cardDetails.name?.trim()) {
-        setCardDetailsValidation((prev) => {
-          return {
-            ...prev,
-            name: false,
-            messages: {
-              ...prev.messages,
-              name: 'Please enter card holder name'
-            }
-          }
-        })
-      }
-
-      if (!_cardDetails.expiry?.trim()) {
-        setCardDetailsValidation((prev) => {
-          return {
-            ...prev,
-            expiry: false,
-            messages: {
-              ...prev.messages,
-              expiry: 'Please enter card expiry date'
-            }
-          }
-        })
-      }
-
-      if (!_cardDetails.cvv?.trim()) {
-        setCardDetailsValidation((prev) => {
-          return {
-            ...prev,
-            cvv: false,
-            messages: {
-              ...prev.messages,
-              cvv: 'Please enter card CVV'
-            }
-          }
-        })
-      }
-
-      if (!_cardDetails.number?.trim()) {
-        setCardDetailsValidation((prev) => {
-          return {
-            ...prev,
-            number: false,
-            messages: {
-              ...prev.messages,
-              number: 'Please enter card number'
-            }
-          }
-        })
-      }
+      setCardValidationFields()
       return
     }
 
     addCard(_cardDetails)
     showNotification({ title: 'Success', message: 'Card Added Successfully!', type: 'success' })
     router.replace({ pathname: '/', params: { type } })
+  }
+
+  const onEdit = () => {
+    if (!isCardValid()) {
+      setCardValidationFields()
+      return
+    }
+
+    editCard(_cardDetails)
+    showNotification({ title: 'Success', message: 'Card Updated Successfully!', type: 'success' })
+    router.replace({ pathname: '/', params: { type: card?.type } })
   }
 
   const isCardValid = () => {
@@ -128,6 +89,60 @@ const CardForm = ({ type, card }: ICardFormProps) => {
       _cardDetails.cvv &&
       _cardDetails.expiry
     )
+  }
+
+  const setCardValidationFields = () => {
+    if (!_cardDetails.name?.trim()) {
+      setCardDetailsValidation((prev) => {
+        return {
+          ...prev,
+          name: false,
+          messages: {
+            ...prev.messages,
+            name: 'Please enter card holder name'
+          }
+        }
+      })
+    }
+
+    if (!_cardDetails.expiry?.trim()) {
+      setCardDetailsValidation((prev) => {
+        return {
+          ...prev,
+          expiry: false,
+          messages: {
+            ...prev.messages,
+            expiry: 'Please enter card expiry date'
+          }
+        }
+      })
+    }
+
+    if (!_cardDetails.cvv?.trim()) {
+      setCardDetailsValidation((prev) => {
+        return {
+          ...prev,
+          cvv: false,
+          messages: {
+            ...prev.messages,
+            cvv: 'Please enter card CVV'
+          }
+        }
+      })
+    }
+
+    if (!_cardDetails.number?.trim()) {
+      setCardDetailsValidation((prev) => {
+        return {
+          ...prev,
+          number: false,
+          messages: {
+            ...prev.messages,
+            number: 'Please enter card number'
+          }
+        }
+      })
+    }
   }
 
   return (
@@ -311,7 +326,7 @@ const CardForm = ({ type, card }: ICardFormProps) => {
 
       <Button
         width="100%"
-        onPress={onSave}
+        onPress={isEdit ? onEdit : onSave}
         icon={_status === 'submitting' ? () => <Spinner /> : undefined}
       >
         Save

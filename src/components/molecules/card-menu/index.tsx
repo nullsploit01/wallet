@@ -1,10 +1,10 @@
-import DialogBox from '../../atoms/dialog-box'
-import CardForm from '../../organisms/card-form'
 import { AntDesign, MaterialIcons } from '@expo/vector-icons'
 import { Fragment } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Separator, Text, View, XStack } from 'tamagui'
 
+import DialogBox from '@/src/components/atoms/dialog-box'
+import CardForm from '@/src/components/organisms/card-form'
 import { useCardStore } from '@/src/stores/use-cards'
 import { ICardMenuProps } from '@/src/types/components/molecules'
 import { CardTypes } from '@/src/types/models/cards'

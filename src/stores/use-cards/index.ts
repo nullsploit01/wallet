@@ -38,6 +38,14 @@ export const useCardStore = create<ICardStoreState & ICardStoreActions>((set, ge
     )
   },
 
+  editCard: (card: ICard) => {
+    card.updatedAt = new Date()
+    const filteredCards = get().cards.filter((c) => c.id !== card.id)
+    const updatedCards = [...filteredCards, card]
+    set(() => ({ cards: updatedCards }))
+    cardService.storeCards(updatedCards)
+  },
+
   removeCard: (card: ICard) => {
     const filteredCards = get().cards.filter((c) => c.id !== card.id)
     set(() => ({ cards: [...filteredCards] }))
