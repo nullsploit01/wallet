@@ -1,4 +1,6 @@
+import DialogBox from '../../atoms/dialog-box'
 import { AntDesign, MaterialIcons } from '@expo/vector-icons'
+import { Fragment } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Separator, Text, View, XStack } from 'tamagui'
 
@@ -14,14 +16,20 @@ const CardMenu = ({ card }: ICardMenuProps) => {
 
   return (
     <View margin="$4" flex={1}>
-      <TouchableOpacity>
-        <XStack alignItems="center" marginVertical="$3">
-          <AntDesign name="edit" size={36} color="black" />
-          <Text fontSize={20} marginLeft="$5">
-            Edit Card
-          </Text>
-        </XStack>
-      </TouchableOpacity>
+      <DialogBox
+        label={
+          <Fragment>
+            <XStack alignItems="center" marginVertical="$3">
+              <AntDesign name="edit" size={36} color="black" />
+              <Text fontSize={20} marginLeft="$5">
+                Edit Card
+              </Text>
+            </XStack>
+          </Fragment>
+        }
+        content={<Text>A</Text>}
+        title="aa"
+      />
       <Separator borderColor="$gray8Light" />
       <TouchableOpacity onPress={handleDeleteCard}>
         <XStack alignItems="center" marginVertical="$3">
