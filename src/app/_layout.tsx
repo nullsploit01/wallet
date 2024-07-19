@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router'
 import { Fragment, useEffect, useState } from 'react'
-import { PortalProvider, TamaguiProvider, Text } from 'tamagui'
+import { PortalProvider, TamaguiProvider, Text, View } from 'tamagui'
 
 import Authenticate from '@/src/components/organisms/authenticate'
 import { NotificationProvider } from '@/src/ctx/notification'
@@ -45,7 +45,9 @@ export default function RootLayout() {
         <TamaguiProvider config={appConfig}>
           <PortalProvider shouldAddRootHost>
             {!_canAuthenticate.isSupported ? (
-              <Text>Device Not Suported</Text>
+              <View flex={1} justifyContent="center" alignItems="center">
+                <Text>Device Not Suported</Text>
+              </View>
             ) : !_canAuthenticate.isSuccess ? (
               <Authenticate initialiseApplication={initialiseApplication} />
             ) : (
