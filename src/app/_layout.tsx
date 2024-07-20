@@ -1,4 +1,5 @@
 import { Stack } from 'expo-router'
+import { usePreventScreenCapture } from 'expo-screen-capture'
 import { Fragment, useEffect, useState } from 'react'
 import { PortalProvider, TamaguiProvider, Text, View } from 'tamagui'
 
@@ -10,6 +11,8 @@ import { useCardStore } from '@/src/stores/use-cards'
 import appConfig from '@/tamagui.config'
 
 export default function RootLayout() {
+  usePreventScreenCapture()
+
   const [_canAuthenticate, setCanAuthenticate] = useState({
     isSupported: true,
     isSuccess: false
