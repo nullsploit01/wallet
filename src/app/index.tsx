@@ -1,6 +1,8 @@
+import { Feather } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
-import { Stack, useLocalSearchParams } from 'expo-router'
+import { router, Stack, useLocalSearchParams } from 'expo-router'
 import { Fragment } from 'react'
+import { TouchableOpacity } from 'react-native'
 
 import CardTabs from '@/src/components/organisms/card-tabs'
 import { CardTypes } from '@/src/types/models/cards'
@@ -21,7 +23,17 @@ const HomePage = () => {
 
   return (
     <Fragment>
-      <Stack.Screen options={{ headerShown: true, headerTitle: getGreeting() }} />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          headerTitle: getGreeting(),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => router.navigate('/menu')}>
+              <Feather name="menu" size={24} color="black" />
+            </TouchableOpacity>
+          )
+        }}
+      />
       <CardTabs active={type !== undefined ? (type as CardTypes) : type} />
     </Fragment>
   )
