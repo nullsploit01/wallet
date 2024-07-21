@@ -5,6 +5,7 @@ import { Fragment } from 'react'
 import { TouchableOpacity } from 'react-native'
 
 import CardTabs from '@/src/components/organisms/card-tabs'
+import { Routes } from '@/src/constants/routes'
 import { CardTypes } from '@/src/types/models/cards'
 import { getGreeting } from '@/src/utils/general'
 
@@ -28,7 +29,7 @@ const HomePage = () => {
           headerShown: true,
           headerTitle: getGreeting(),
           headerRight: () => (
-            <TouchableOpacity onPress={() => router.navigate('/menu')}>
+            <TouchableOpacity onPress={() => router.navigate(Routes.Menu.link)}>
               <Feather name="menu" size={24} color="black" />
             </TouchableOpacity>
           )

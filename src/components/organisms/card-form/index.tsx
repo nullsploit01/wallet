@@ -6,6 +6,7 @@ import { PaymentIcon } from 'react-native-payment-icons'
 import { Button, Form, Spinner, View, XStack, YStack } from 'tamagui'
 
 import TextInput from '@/src/components/atoms/text-input/input'
+import { Routes } from '@/src/constants/routes'
 import { useNotification } from '@/src/hooks/notification'
 import { useCardStore } from '@/src/stores/use-cards'
 import { ICardFormProps } from '@/src/types/components/organisms'
@@ -64,7 +65,7 @@ const CardForm = ({ type, card, isEdit }: ICardFormProps) => {
 
     addCard(_cardDetails)
     showNotification({ title: 'Success', message: 'Card Added Successfully!', type: 'success' })
-    router.replace({ pathname: '/', params: { type } })
+    router.replace({ pathname: Routes.Home.link, params: { type } })
   }
 
   const onEdit = () => {
@@ -75,7 +76,7 @@ const CardForm = ({ type, card, isEdit }: ICardFormProps) => {
 
     editCard(_cardDetails)
     showNotification({ title: 'Success', message: 'Card Updated Successfully!', type: 'success' })
-    router.replace({ pathname: '/', params: { type: card?.type } })
+    router.replace({ pathname: Routes.Home.link, params: { type: card?.type } })
   }
 
   const isCardValid = () => {
