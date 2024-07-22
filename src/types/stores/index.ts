@@ -10,4 +10,5 @@ export interface ICardStoreActions {
   getCardsFromStorage: () => Promise<ICard[]>
   removeCard: (card: ICard) => void
   editCard: (card: ICard) => void
+  removeAllCards: () => void
 }

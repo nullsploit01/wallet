@@ -50,5 +50,11 @@ export const useCardStore = create<ICardStoreState & ICardStoreActions>((set, ge
     const filteredCards = get().cards.filter((c) => c.id !== card.id)
     set(() => ({ cards: [...filteredCards] }))
     cardService.storeCards(filteredCards)
+  },
+
+  removeAllCards: () => {
+    set(() => {
+      return { cards: [] }
+    })
   }
 }))

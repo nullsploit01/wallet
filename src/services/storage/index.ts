@@ -15,6 +15,10 @@ class StorageService {
       return null
     }
   }
+
+  clearAll = async () => {
+    await AsyncStorage.clear()
+  }
 }
 
 export const storageService = new StorageService()
