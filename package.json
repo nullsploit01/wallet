@@ -56,7 +56,8 @@
     "react-native-web": "~0.19.10",
     "tamagui": "^1.101.4",
     "zustand": "^4.5.4",
-    "expo-screen-capture": "~6.0.1"
+    "expo-screen-capture": "~6.0.1",
+    "expo-application": "~5.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
