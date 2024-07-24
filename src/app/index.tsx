@@ -28,6 +28,7 @@ const HomePage = () => {
         options={{
           headerShown: true,
           headerTitle: getGreeting(),
+          headerStyle: { backgroundColor: '#F1F1F1' },
           headerRight: () => (
             <TouchableOpacity onPress={() => router.navigate(Routes.Menu.link)}>
               <Feather name="menu" size={24} color="black" />

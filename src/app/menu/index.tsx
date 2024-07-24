@@ -30,7 +30,9 @@ const MenuPage = () => {
 
   return (
     <Fragment>
-      <Stack.Screen options={{ headerTitle: 'Menu' }} />
+      <Stack.Screen
+        options={{ headerTitle: 'Menu', headerStyle: { backgroundColor: '#F1F1F1' } }}
+      />
       <View marginHorizontal="$3">
         <View marginVertical="$5">
           <TouchableOpacity onPress={() => setShowWarning(true)}>

@@ -18,7 +18,7 @@ const Cards = ({ type }: ICardsProps) => {
   }
 
   return (
-    <View flex={1} justifyContent="flex-start">
+    <View backgroundColor="$gray5Light" flex={1} justifyContent="flex-start">
       {!getCardsByType().length && <NoCards />}
       <ScrollView>
         {getCardsByType().map((card) => {
