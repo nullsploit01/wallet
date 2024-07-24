@@ -34,7 +34,7 @@ const CardDetails = ({ card }: ICardDetailsProps) => {
     <Card
       elevate
       shadowColor="$accentColor"
-      backgroundColor={card.type === CardTypes.Credit ? '$gray9Dark' : 'black'}
+      backgroundColor={card.type === CardTypes.Credit ? 'black' : '$red10Light'}
       borderColor="$gray10"
       borderWidth="$1.5"
     >
