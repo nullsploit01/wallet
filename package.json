@@ -25,7 +25,7 @@
     "card-validator": "^10.0.0",
     "credit-card-type": "^10.0.1",
     "crypto-es": "^2.1.0",
-    "expo": "~51.0.21",
+    "expo": "~51.0.22",
     "expo-asset": "~10.0.10",
     "expo-clipboard": "~6.0.3",
     "expo-constants": "~16.0.2",
