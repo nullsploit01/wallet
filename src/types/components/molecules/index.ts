@@ -19,3 +19,7 @@ export interface ICardDetailsProps {
 export interface ICardMenuProps {
   card: ICard
 }
+
+export interface ICardColorPaletteProps {
+  card: ICard
+}

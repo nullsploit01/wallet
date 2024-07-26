@@ -47,8 +47,8 @@ const CardMenu = ({ card }: ICardMenuProps) => {
           </XStack>
         </TouchableOpacity>
         {_showColorPalette && (
-          <View marginTop="$2">
-            <CardColorPalette />
+          <View marginTop="$3">
+            <CardColorPalette card={card} />
           </View>
         )}
       </View>
