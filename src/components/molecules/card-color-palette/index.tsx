@@ -29,13 +29,13 @@ const CardColorPalette = ({ card }: ICardColorPaletteProps) => {
         type: 'success',
         title: 'Success'
       })
+    } else {
+      showNotification({
+        message: 'Something went wrong, please try again',
+        type: 'error',
+        title: 'Error'
+      })
     }
-
-    showNotification({
-      message: 'Something went wrong, please try again',
-      type: 'error',
-      title: 'Error'
-    })
 
     router.navigate({ pathname: Routes.Home.link, params: { type: card.type } })
   }
