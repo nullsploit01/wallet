@@ -1,5 +1,6 @@
-import { AntDesign, MaterialIcons } from '@expo/vector-icons'
-import { Fragment } from 'react'
+import CardColorPalette from '../card-color-palette'
+import { AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons'
+import { Fragment, useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Separator, Text, View, XStack } from 'tamagui'
 
@@ -11,6 +12,8 @@ import { CardTypes } from '@/src/types/models/cards'
 
 const CardMenu = ({ card }: ICardMenuProps) => {
   const { removeCard } = useCardStore()
+  const [_showColorPalette, setShowColorPalette] = useState(false)
+
   const cardType = card.type === CardTypes.Credit ? 'Credit' : 'Debit'
 
   const handleDeleteCard = () => {
@@ -33,6 +36,22 @@ const CardMenu = ({ card }: ICardMenuProps) => {
         content={<CardForm type={card.type} isEdit card={card} />}
         title={`Edit ${cardType} Card`}
       />
+      <Separator borderColor="$gray8Light" />
+      <View marginVertical="$3">
+        <TouchableOpacity onPress={() => setShowColorPalette(true)}>
+          <XStack alignItems="center">
+            <Ionicons name="color-palette" size={36} color="#27408B" />
+            <Text fontSize={20} marginLeft="$5">
+              Change Color
+            </Text>
+          </XStack>
+        </TouchableOpacity>
+        {_showColorPalette && (
+          <View marginTop="$2">
+            <CardColorPalette />
+          </View>
+        )}
+      </View>
       <Separator borderColor="$gray8Light" />
       <TouchableOpacity onPress={handleDeleteCard}>
         <XStack alignItems="center" marginVertical="$3">
