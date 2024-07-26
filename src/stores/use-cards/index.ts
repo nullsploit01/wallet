@@ -3,13 +3,20 @@ import { create } from 'zustand'
 import { cardService } from '@/src/services/card'
 import { ICard } from '@/src/types/models/cards'
 import { ICardStoreActions, ICardStoreState } from '@/src/types/stores'
+import { getCardDefaultColor } from '@/src/utils/card'
 import { generateRandomId } from '@/src/utils/general'
 
 export const useCardStore = create<ICardStoreState & ICardStoreActions>((set, get) => ({
   cards: [],
 
   addCard: (card: ICard) => {
-    card = { ...card, createdAt: new Date(), updatedAt: new Date(), id: generateRandomId() }
+    card = {
+      ...card,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      id: generateRandomId(),
+      color: getCardDefaultColor(card)
+    }
     set((state) => ({ cards: [card, ...state.cards] }))
     cardService.storeCards(get().cards)
   },

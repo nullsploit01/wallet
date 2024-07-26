@@ -13,6 +13,7 @@ export interface ICard {
   expiry: string
   name: string
   label: string
+  color: string
   cardProvider: keyof typeof CardProviders | null
   createdAt: Date
   updatedAt: Date
