@@ -1,50 +1,95 @@
-# Welcome to your Expo app 👋
+# Wallet
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
 
-## Get started
+`Wallet` is a mobile application designed to securely store your credit and debit card information locally with encryption. Built using Expo, this app ensures your sensitive data is protected and easily accessible on your mobile device.
 
-1. Install dependencies
+## Features
+
+- **Secure Storage**: Encrypts and stores your card information locally to ensure maximum security.
+- **User-Friendly Interface**: Simple and intuitive UI for effortless navigation and management.
+- **Local Data Management**: No cloud storage or API calls; all data is stored locally on your device.
+- **Add/Edit Cards**: Easily add new cards or edit existing card information.
+- **Copy Card Number**: Quickly copy card numbers for ease of access.
+- **Mobile Lock Authentication**: Utilizes your mobile device's lock for authentication.
+- **Clear Data Option**: Option to clear all stored data from the menu.
+
+## Installation
+
+To install and run the `wallet` application locally, follow these steps:
+
+1. **Prerequisites:**
+
+   - Ensure you have [nodejs](https://nodejs.org) >= 20.x and [expo-cli](https://docs.expo.dev/more/expo-cli/) installed.
+
+2. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/nullsploit01/wallet.git
+   cd wallet
+   ```
+
+3. **Install dependencies:**
 
    ```bash
    npm install
    ```
 
-2. Start the app
-
+4. **Start the application:**
    ```bash
-    npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+## Usage
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. **Add a New Card:**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   - Open the application and navigate to the "Add Card" section.
+   - Enter your card details and save them securely.
 
-## Get a fresh project
+2. **Edit Stored Cards:**
 
-When you're ready, run:
+   - Access the "Cards" section to view all your stored cards.
+   - Select a card to edit its details and save the changes.
 
-```bash
-npm run reset-project
-```
+3. **Copy Card Number:**
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+   - Tap on a stored card and use the copy feature to easily copy the card number.
 
-## Learn more
+4. **Mobile Lock Authentication:**
 
-To learn more about developing your project with Expo, look at the following resources:
+   - The app utilizes your mobile device's lock (e.g., fingerprint, face ID, PIN) for authentication.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+5. **Clear Data:**
+   - Use the "Clear Data" option in the menu to remove all stored data from the app.
 
-## Join the community
+## Contributing
 
-Join our community of developers creating universal apps.
+We welcome contributions from the community! To contribute, follow these steps:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix:
+   ```bash
+   git checkout -b feature-or-bugfix-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Description of your changes"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature-or-bugfix-name
+   ```
+5. Open a pull request detailing your changes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Contact
+
+For any questions or suggestions, please open an issue on GitHub or contact us directly.
+
+---
+
+_Securely manage your card information with ease!_
